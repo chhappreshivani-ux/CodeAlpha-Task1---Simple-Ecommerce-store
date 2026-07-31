@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="checkout-box">
+
+    <h1>Checkout</h1>
+
+    <input type="text" placeholder="Full Name"><br><br>
+
+    <input type="text" placeholder="Address"><br><br>
+
+    <input type="text" placeholder="Phone Number"><br><br>
+
+   <a href="success.html">
+    <button onclick="placeOrder()">Place Order</button>
+</a>
+
+</div>
+<script>
+function placeOrder() {
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if(cart.length === 0){
+        alert("Your cart is empty!");
+        return;
+    }
+
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    let order = {
+        orderId: "ORD" + Date.now(),
+        date: new Date().toLocaleString(),
+        items: cart
+    };
+
+    orders.push(order);
+
+    localStorage.setItem("orders", JSON.stringify(orders));
+
+    localStorage.removeItem("cart");
+
+    window.location.href = "success.html";
+
+}
+</script>
+</body>
+</html>

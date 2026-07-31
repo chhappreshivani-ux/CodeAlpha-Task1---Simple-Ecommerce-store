@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="success-box">
+
+    <h1>🎉 Order Placed Successfully!</h1>
+
+    <p>Thank you for shopping with MyShop.</p>
+
+    <h3 id="order-id"></h3>
+    <p id="order-date"></p>
+
+    <a href="index.html">
+        <button>Continue Shopping</button>
+    </a>
+
+</div>
+
+<script>
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+if(orders.length > 0){
+
+    let lastOrder = orders[orders.length - 1];
+
+    document.getElementById("order-id").innerHTML =
+    "Order ID: " + lastOrder.orderId;
+
+    document.getElementById("order-date").innerHTML =
+    "Order Date: " + lastOrder.date;
+}
+
+</script>
+
+</body>
+</html>

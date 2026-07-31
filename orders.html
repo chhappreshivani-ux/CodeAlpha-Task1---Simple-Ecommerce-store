@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Orders</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1 style="text-align:center; margin:20px;">📦 My Orders</h1>
+
+<div id="orders-list"></div>
+
+<script>
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+let output = "";
+
+if(orders.length === 0){
+
+    output = "<h2 style='text-align:center;'>No Orders Found</h2>";
+
+}else{
+
+    orders.forEach(order=>{
+
+        output += `
+        <div class="cart-item">
+
+            <div>
+
+                <h3>${order.orderId}</h3>
+
+                <p>${order.date}</p>
+
+                <p>Total Products : ${order.items.length}</p>
+<button onclick="cancelOrder('${order.orderId}')">
+❌ Cancel Order
+</button>
+            </div>
+
+        </div>
+        `;
+
+    });
+
+}
+
+document.getElementById("orders-list").innerHTML = output;
+function cancelOrder(orderId){
+
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    let confirmCancel = confirm("Are you sure you want to cancel this order?");
+
+    if(confirmCancel){
+
+        orders = orders.filter(order => order.orderId !== orderId);
+
+        localStorage.setItem("orders", JSON.stringify(orders));
+
+        alert("Order Cancelled Successfully!");
+
+        location.reload();
+
+    }
+
+}
+</script>
+
+</body>
+</html>

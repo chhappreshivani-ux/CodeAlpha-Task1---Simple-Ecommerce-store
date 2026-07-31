@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple E-Commerce Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<div>
+    <footer class="footer">
+    <p>© 2026 MyShop. All Rights Reserved.</p>
+    <p>Email: support@myshop.com | Phone: +91 9876543210</p>
+    
+</footer>
+
+    <h1>Simple E-Commerce Store</h1>
+    <nav class="navbar">
+    <h2>MyShop</h2>
+
+    <div class="nav-search">
+        <input type="text" id="search" placeholder="Search products..." onkeyup="searchProducts()">
+        <button>Search</button>
+    </div>
+
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="wishlist.html">❤️ Wishlist</a></li>
+        <li><a href="orders.html">📦 My Orders</a></li>
+        <li><a href="#">Contact</a></li>
+        <li id="login-area">
+    <a href="login.html">Login</a>
+</li>
+        <li><a href="cart.html">🛒 Cart (<span id="cart-count">0</span>)</a></li>
+    </ul>
+</nav>
+<div class="slider">
+
+    <img id="slider-image" src="images/banner1.jpg" alt="Banner">
+
+</div>
+    <section class="hero">
+    <h1>Welcome to Our E-Commerce Store</h1>
+    <p>Shop the best products at amazing prices</p>
+    <button>Shop Now</button>
+</section>
+<div class="categories">
+
+<button onclick="filterCategory('all')">All</button>
+
+<button onclick="filterCategory('Electronics')">
+💻 Electronics
+</button>
+
+<button onclick="filterCategory('Watches')">
+⌚ Watches
+</button>
+
+<button onclick="filterCategory('Accessories')">
+🎧 Accessories
+</button>
+
+<button onclick="filterCategory('Computer')">
+🖥️ Computer
+</button>
+
+</div>
+<!-- Hero Banner -->
+<section class="banner">
+    <div class="banner-content">
+        <h1>Big Sale 50% OFF</h1>
+        <p>Latest Fashion Products At Best Price</p>
+        <button>Shop Now</button>
+    </div>
+</section>
+<h2 class="product-title">Featured Products</h2>
+
+<div class="products">
+
+
+    <div class="product" data-category="Electronics">
+      <a href="product.html?product=mouse">
+    <img src="images/mouse.jpg" alt="Wireless Mouse">
+</a>
+
+<h3>
+    <a href="product.html?product=mouse">Wireless Mouse</a>
+</h3>
+<p>₹500</p>
+
+<p class="rating">⭐⭐⭐⭐⭐ (4.8)</p>
+<button onclick="addToWishlist('Wireless Mouse','images/mouse.jpg')">
+❤️ Wishlist
+</button>
+<button onclick="addToCart('Wireless Mouse',500,'images/mouse.jpg')">
+    Add to Cart
+</button>
+    </div>
+    
+
+    <div class="product" data-category="Computer">
+       <a href="product.html?product=keyboard">
+    <img src="images/keyboard.avif" alt="Keyboard">
+</a>
+
+<h3>
+    <a href="product.html?product=keyboard">Keyboard</a>
+</h3>
+    
+<p>₹800</p>
+
+<p class="rating">⭐⭐⭐⭐⭐ (4.5)</p>
+<button onclick="addToWishlist('Keyboard','images/keyboard.avif')">
+❤️ Wishlist
+</button>
+
+<button onclick="addToCart('Keyboard',800,'images/keyboard.avif')">
+    Add to Cart
+</button>
+       
+    
+</div>
+
+    <div class="product" data-category="Accessories">
+        <a href="product.html?product=headphones">
+    <img src="images/headphone.webp" alt="Headphones">
+</a>
+
+<h3>
+    <a href="product.html?product=headphones">Headphones</a>
+</h3>
+<p>₹1200</p>
+
+<p class="rating">⭐⭐⭐⭐⭐ (4.6)</p>
+<button onclick="addToWishlist('Headphones','images/headphone.webp')">
+❤️ Wishlist
+</button>
+
+<button onclick="addToCart('Headphones',1200,'images/headphone.webp')">
+    Add to Cart
+</button>
+        
+    </div>
+    
+
+    <div class="product" data-category="Watches">
+       <a href="product.html?product=smartwatch">
+    <img src="images/smart watch.jpg" alt="Smart Watch">
+</a>
+
+<h3>
+    <a href="product.html?product=smartwatch">Smart Watch</a>
+</h3>
+<p>₹2500</p>
+
+<p class="rating">⭐⭐⭐⭐⭐ (4.9)</p>
+<button onclick="addToWishlist('Smart Watch','images/smart watch.jpg')">
+❤️ Wishlist
+</button>
+
+<button onclick="addToCart('Smart Watch',2500,'images/smart watch.jpg')">
+    Add to Cart
+</button>
+        
+    </div>
+   
+
+</div>
+<script>
+
+let user = JSON.parse(localStorage.getItem("user"));
+let loginStatus = localStorage.getItem("loginStatus");
+
+let loginArea = document.getElementById("login-area");
+
+
+if(loginStatus === "true" && user){
+
+    loginArea.innerHTML = `
+        <span>👤 ${user.username}</span>
+        <button onclick="logout()">Logout</button>
+    `;
+
+}
+
+
+function logout(){
+
+    localStorage.removeItem("loginStatus");
+
+    alert("Logout Successful");
+
+    window.location.reload();
+
+}
+
+</script>
+<script>
+document.getElementById("cart-count").innerText =
+JSON.parse(localStorage.getItem("cart"))?.length || 0;
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>

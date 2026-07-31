@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Details</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="product-details">
+
+    <img id="product-image" src="" alt="Product">
+
+    <div class="details">
+
+        <h1 id="product-name"></h1>
+
+        <h2 id="product-price"></h2>
+
+        <p id="product-description"></p>
+        <div class="quantity-box">
+
+    <button onclick="decreaseQty()">-</button>
+
+    <span id="qty">1</span>
+
+    <button onclick="increaseQty()">+</button>
+
+</div>
+
+        <button id="cartBtn">
+            Add to Cart
+        </button>
+
+        <button onclick="window.location.href='checkout.html'">
+            Buy Now
+        </button>
+
+    </div>
+
+</div>
+<h2 class="product-title">Related Products</h2>
+
+<div class="products">
+
+    <div class="product">
+        <a href="product.html?product=mouse">
+            <img src="images/mouse.jpg" alt="Mouse">
+        </a>
+        <h3>Wireless Mouse</h3>
+        <p>₹500</p>
+    </div>
+
+    <div class="product">
+        <a href="product.html?product=keyboard">
+            <img src="images/keyboard.avif" alt="Keyboard">
+        </a>
+        <h3>Keyboard</h3>
+        <p>₹800</p>
+    </div>
+
+    <div class="product">
+        <a href="product.html?product=headphones">
+            <img src="images/headphone.webp" alt="Headphones">
+        </a>
+        <h3>Headphones</h3>
+        <p>₹1200</p>
+    </div>
+
+    <div class="product">
+        <a href="product.html?product=smartwatch">
+            <img src="images/smart watch.jpg" alt="Smart Watch">
+        </a>
+        <h3>Smart Watch</h3>
+        <p>₹2500</p>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+<script>
+
+const products = {
+
+mouse:{
+name:"Wireless Mouse",
+price:500,
+image:"images/mouse.jpg",
+description:"High-quality wireless mouse with fast response, comfortable grip and long battery life."
+},
+
+keyboard:{
+name:"Keyboard",
+price:800,
+image:"images/keyboard.avif",
+description:"Comfortable keyboard with smooth typing experience."
+},
+
+headphones:{
+name:"Headphones",
+price:1200,
+image:"images/headphone.webp",
+description:"Premium headphones with deep bass and crystal clear sound."
+},
+
+smartwatch:{
+name:"Smart Watch",
+price:2500,
+image:"images/smart watch.jpg",
+description:"Smart watch with fitness tracking and heart rate monitor."
+}
+
+};
+
+const params = new URLSearchParams(window.location.search);
+
+const product = products[params.get("product")];
+
+document.getElementById("product-image").src = product.image;
+document.getElementById("product-name").innerText = product.name;
+document.getElementById("product-price").innerText = "₹" + product.price;
+document.getElementById("product-description").innerText = product.description;
+
+document.getElementById("cartBtn").onclick = function(){
+
+addToCart(product.name,product.price,product.image);
+
+};
+let quantity = 1;
+
+function increaseQty() {
+    quantity++;
+    document.getElementById("qty").innerText = quantity;
+}
+
+function decreaseQty() {
+    if (quantity > 1) {
+        quantity--;
+        document.getElementById("qty").innerText = quantity;
+    }
+}
+
+document.getElementById("cartBtn").onclick = function () {
+
+    for (let i = 0; i < quantity; i++) {
+        addToCart(product.name, product.price, product.image);
+    }
+
+};
+</script>
+
+</body>
+</html>
